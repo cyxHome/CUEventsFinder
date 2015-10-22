@@ -16,17 +16,20 @@
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css" type="text/css">
 
-    <!-- Plugin CSS -->
+    <!-- Plugin CSS some animation effect on the contact info --> 
     <link rel="stylesheet" href="css/animate.min.css" type="text/css">
 
-    <!-- Custom CSS For Popular Events -->
-    <link href="css/agency.css" rel="stylesheet">
+    <!-- Custom CSS For Popular Events and Category -->
+    <link href="css/index.css" rel="stylesheet">
+
+    <!-- Custom CSS For Nav bar -->
+    <link href="css/navbar.css" rel="stylesheet">
+    <!-- <link href="css/agency.css" rel="stylesheet"> -->
+
     <!-- Custom CSS For Header, Catagory, Footer -->
-    <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <!-- <link rel="stylesheet" href="css/creative.css" type="text/css"> -->
 
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 Shim and Resond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -37,40 +40,10 @@
 
 <body id="page-top">
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Cornell Events Finder</a>
-            </div>
+    <div id="navbar">
+        <!-- use JQuery to load navigation bar here -->
+    </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#portfolio">Popular</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#catagory">Catagory</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="map">Map</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="timeline">Upcoming Events</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
 
     <!-- Header start here -->
     <header>
@@ -123,7 +96,7 @@
     <!-- Search ends here -->
 
     <!-- Popular Events Grid Section -->
-    <section id="portfolio" class="bg-light-gray">
+    <section id="popular" class="bg-light-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -131,95 +104,29 @@
                     <hr class="primary">
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
+            {{#each popular}}
+                <div class="col-md-4 col-sm-6 popular-item">
+                    <a href="#{{id}}" class="popular-link" data-toggle="modal">
+                        <div class="popular-hover">
+                            <div class="popular-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/roundicons.png" class="img-responsive" alt="">
+                        <img src="{{img}}" class="img-responsive" alt="">
                     </a>
-                    <div class="portfolio-caption">
-                        <h4>Nightmare at Edgemoor Lane</h4>
-                        <p class="text-muted">112 Edgemoor <br> 10/24/2015 7:00PM</p>
+                    <div class="popular-caption">
+                        <h4>{{title}}</h4>
+                        <p class="text-muted">{{location}}<br>{{time}}</p>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/startup-framework.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Global Health Experiential Learning Symposium</h4>
-                        <p class="text-muted">MVR Commons <br> 10/16/2015 5:00PM</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/treehouse.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Serve or Be Served Charity Volleyball Tournament</h4>
-                        <p class="text-muted">Barton Hall <br> 10/18/2015 11:00AM</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/golden.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>CAPS Movie Night</h4>
-                        <p class="text-muted">187 Rockefeller <br> 10/15/2015 5:00PM</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/escape.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Connected in Crime: How Co-Offending</h4>
-                        <p class="text-muted">Uris Hall 302 <br> 10/9/2015 3:30PM</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/dreams.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Steve Jobs -- FREE SNEAK PREVIEW</h4>
-                        <p class="text-muted">Willard Straight Theatre <br> 10/14/2015 9:00PM</p>
-                    </div>
-                </div>
+            {{/each}}
             </div>
         </div>
     </section>
     <!-- Popular events end here -->
+
 
 
     <!-- Catagory starts here -->
@@ -234,122 +141,31 @@
         </div>
         <div class="container-fluid">
             <div class="row no-gutter">
+            {{#each category}}
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/1.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
+                    <a href="#" class="category-box">
+                        <img src="{{img}}" class="img-responsive" alt="">
+                        <div class="category-box-caption">
+                            <div class="category-box-caption-content">
                                 <div class="project-category text-faded">
                                     <!-- Catagory -->
                                 </div>
                                 <div class="project-name">
-                                    Professional Events
+                                    {{title}}
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/2.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    <!-- Catagory -->
-                                </div>
-                                <div class="project-name">
-                                    Social Events
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    <!-- Category -->
-                                </div>
-                                <div class="project-name">
-                                    Dance
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/4.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    <!-- Category -->
-                                </div>
-                                <div class="project-name">
-                                    Performance
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/5.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    <!-- Category -->
-                                </div>
-                                <div class="project-name">
-                                    Political
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="img/portfolio/6.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    <!-- Category -->
-                                </div>
-                                <div class="project-name">
-                                    Cornell Sponsored
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+            {{/each}}
             </div>
         </div>
     </section>
     <!-- Catagory ends here -->
 
-    <!-- Contact information starts here -->
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Contact Us</h2>
-                    <hr class="primary">
-                    <p>Have any question about posting your events? Want to send us some feedback or simply want to complain about our website...</p>
-                </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>123-456-6789</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:your-email@your-domain.com">feedback@cueventsfinder.com</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Contact information ends here -->
+    <div id="contactinfo">
+        <!-- Use JQuery to load Contact info here -->
+    </div>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -362,10 +178,8 @@
     <script src="js/jquery.fittext.js"></script>
     <script src="js/wow.min.js"></script>
 
-    <!-- Custom Header, Footer, Catagory Theme JavaScript -->
-    <script src="js/creative.js"></script>
-    <!-- Custom Theme Popular Events JavaScript -->
-    <script src="js/agency.js"></script>
+    <!-- load navbar and contact info -->
+    <script src="js/index.js"></script>
 
 </body>
 

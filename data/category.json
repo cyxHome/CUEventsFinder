@@ -1,0 +1,34 @@
+{
+	"category": [
+		{
+			"id": "category1",
+			"img": "img/category/1.jpg",
+			"title": "Professional Events"
+		},
+		{
+			"id": "category2",
+			"img": "img/category/2.jpg",
+			"title": "Social Events"
+		},
+		{
+			"id": "category3",
+			"img": "img/category/3.jpg",
+			"title": "Dance"
+		},
+		{
+			"id": "category4",
+			"img": "img/category/4.jpg",
+			"title": "Performance"
+		},
+		{
+			"id": "category5",
+			"img": "img/category/5.jpg",
+			"title": "Political"
+		},
+		{
+			"id": "category6",
+			"img": "img/category/6.jpg",
+			"title": "Social"
+		}
+	]
+}
