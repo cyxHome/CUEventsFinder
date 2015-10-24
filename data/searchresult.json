@@ -1,15 +1,15 @@
 {
-	"popular": [
+	"result": [
 		{
-			"id": "popularModal1",
-			"img": "img/popular/dreams.png",
+			"id": "result1",
+			"img": "img/popular/roundicons.png",
 			"url": "/details",
 			"title": "Has awesome pet mice",
 			"location": "112 Edgemoor ",
 			"time": "10/24/2015 7:00PM" 
 		},
 		{
-			"id": "popularModal2",
+			"id": "result2",
 			"img": "img/popular/startup-framework.png",
 			"url": "/details",
 			"title": "Has awesome pet mice",
@@ -17,7 +17,7 @@
 			"time": "10/24/2015 7:00PM" 
 		},
 		{
-			"id": "popularModal3",
+			"id": "result3",
 			"img": "img/popular/treehouse.png",
 			"url": "/details",
 			"title": "Has awesome pet mice",
@@ -25,7 +25,7 @@
 			"time": "10/24/2015 7:00PM" 
 		},
 		{
-			"id": "popularModal4",
+			"id": "result4",
 			"img": "img/popular/golden.png",
 			"url": "/details",
 			"title": "Has awesome pet mice",
@@ -33,7 +33,7 @@
 			"time": "10/24/2015 7:00PM" 
 		},
 		{
-			"id": "popularModal5",
+			"id": "result5",
 			"img": "img/popular/escape.png",
 			"url": "/details",
 			"title": "Has awesome pet mice",
@@ -41,7 +41,7 @@
 			"time": "10/24/2015 7:00PM" 
 		},
 		{
-			"id": "popularModal6",
+			"id": "result6",
 			"img": "img/popular/dreams.png",
 			"url": "/details",
 			"title": "Has awesome pet mice",

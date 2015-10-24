@@ -13,6 +13,8 @@ var timeline = require('./routes/timeline');
 var map = require('./routes/map');
 var nav = require('./routes/navbar');
 var contactinfo = require('./routes/contactinfo');
+var details = require('./routes/details');
+var searchlist = require('./routes/searchlist');
 // Example route
 // var user = require('./routes/user');
 
@@ -44,6 +46,8 @@ app.get('/timeline', timeline.view);
 app.get('/map', map.view);
 app.get('/navbar', nav.view);
 app.get('/contactinfo', contactinfo.view);
+app.get('/details', details.view);
+app.get('/searchlist', searchlist.view);
 // Example route
 // app.get('/users', user.list);
 

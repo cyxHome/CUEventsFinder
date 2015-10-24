@@ -1,5 +1,21 @@
 #map {
-	margin: 0px 20px 0px 20px;
-	height: 70%;
-	width: 80%;
+	position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin-top: 150px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                
+/*	position: absolute;
+    top: 50%;
+    left: 50%;
+	height: 100%;
+	width: 90%;*/
+}
+section.map-head {
+	padding-bottom: 0;
 }

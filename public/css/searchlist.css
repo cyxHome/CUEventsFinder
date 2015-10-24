@@ -1,0 +1,81 @@
+body {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #f5f5f5;
+}
+
+.well {
+	background-color: #fff;
+}
+
+/* remove the underline decoration */
+.events-list a {
+    text-decoration: none;
+}
+
+
+#serachlist {
+	/* leave space for the navbar */
+	padding-top: 80px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-weight: 700;
+}
+
+.single-event {
+	margin-top: 10px;
+  	background-color: #fff;
+  	padding: 10px;
+	width: 100%;
+
+}
+
+.single-event-img {
+	float:left;
+	width: 200px;
+	height: 100px;
+	position: relative;
+	margin-right: 15px;
+}
+
+.single-event-img img {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.single-event-text {
+    float: none;
+    margin-left: 220px;
+    color: #000;
+}
+
+.single-event-text .time {
+    float: none;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+.single-event-text .title {
+    float: none;
+    font-weight: bold;
+    text-transform: none;
+    height: 50px;
+    max-height: 50px;
+    margin-top: 0;
+}
+
+.single-event-text .location {
+    float: none;
+    font-weight: 200;
+}
