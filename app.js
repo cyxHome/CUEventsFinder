@@ -8,6 +8,7 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
 
+var signin = require('./routes/signin');
 var index = require('./routes/index');
 var timeline = require('./routes/timeline');
 var map = require('./routes/map');
@@ -15,6 +16,7 @@ var nav = require('./routes/navbar');
 var contactinfo = require('./routes/contactinfo');
 var details = require('./routes/details');
 var searchlist = require('./routes/searchlist');
+var Firebase = require("firebase");
 // Example route
 // var user = require('./routes/user');
 
@@ -41,7 +43,8 @@ if ('development' == app.get('env')) {
 }
 
 // Add routes here
-app.get('/', index.view);
+app.get('/', signin.view);
+app.get('/index', index.view);
 app.get('/timeline', timeline.view);
 app.get('/map', map.view);
 app.get('/navbar', nav.view);
