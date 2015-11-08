@@ -16,6 +16,7 @@ var nav = require('./routes/navbar');
 var contactinfo = require('./routes/contactinfo');
 var details = require('./routes/details');
 var searchlist = require('./routes/searchlist');
+var account = require('./routes/account');
 var Firebase = require("firebase");
 // Example route
 // var user = require('./routes/user');
@@ -51,6 +52,9 @@ app.get('/navbar', nav.view);
 app.get('/contactinfo', contactinfo.view);
 app.get('/details', details.view);
 app.get('/searchlist', searchlist.view);
+app.post('/account/add-account', account.addAccount);
+app.post('/account/login', account.findAccount);
+app.post('/account/sign-up-name-check', account.nameCheck);
 // Example route
 // app.get('/users', user.list);
 

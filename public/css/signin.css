@@ -112,3 +112,15 @@ form[role=login] {
 .background-image.visible {
   opacity: 1;
 }
+
+.error-info {
+  color: red;
+}
+
+.success-info {
+  color: green;
+}
+
+.wanning-info {
+  color: #CC7500;
+}
