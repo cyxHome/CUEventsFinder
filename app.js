@@ -6,7 +6,8 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var handlebars = require('express3-handlebars')
+var handlebars = require('express3-handlebars');
+var methodOverride = require('method-override');
 
 var signin = require('./routes/signin');
 var index = require('./routes/index');
@@ -32,9 +33,9 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.methodOverride());
+// app.use(express.methodOverride());  // comment because depreciate
 app.use(express.cookieParser('Intro HCI secret key'));
-app.use(express.session());
+// app.use(express.session());    // comment because depreciate
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
