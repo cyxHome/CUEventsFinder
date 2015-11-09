@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cornell Event Finder - Post Event</title>
+
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS For Navbar and Contact -->
+    <link href="css/navbar.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/newpost.css" rel="stylesheet">
+
+    <link href="css/font-awesome.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
+    <!-- Custom Fonts -->
+    <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <script src="js/moment.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+    <script src="js/locationpicker.jquery.js"></script>
+    <script src="js/firebase.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <div id="navbar">
+        <!-- use JQuery to load navigation bar here -->
+    </div>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">New Event</h2>
+                    <h3 class="section-subheading text-muted">Add a new event that you host.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Title of Your Event" id="title">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <div class='form-control input-group date datetimepicker'  id='datetimepicker1'>
+                                        <input type='text' class="form-control" placeholder="Starting Date & Time" id="starting"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class='form-control input-group date datetimepicker'  id='datetimepicker2'>
+                                        <input type='text' class="form-control" placeholder="Ending Date & Time" id="ending"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group dropdown">
+                                  <button class="form-control btn btn-defalut dropdown-toggle" type="button" data-toggle="dropdown" id="primary-tag">Choose a Tag</span></button>
+                                  <ul class="dropdown-menu">
+                                    <li class="menu-li" id="tag1"><a href="#">Professional Events</a></li>
+                                    <li class="menu-li" id="tag2"><a href="#">Social Events</a></li>
+                                    <li class="menu-li" id="tag3"><a href="#">Performance Events</a></li>
+                                    <li class="menu-li" id="tag4"><a href="#">Political Events</a></li>
+                                    <li class="menu-li" id="tag5"><a href="#">Seminars</a></li>
+                                    <li class="menu-li" id="tag6"><a href="#">Athletics</a></li>
+                                  </ul>
+                                </div>
+                                <div class="invisible zerosize">
+                                    <input id="primary-tag-value"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Restrict to Specific Attendants? *" id="restriction">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+
+
+                                <div class="form-group ">
+                                    <div class="form-control checkboxes">
+                                        <div class="col-sm-5">
+                                            <label>
+                                              <input type="checkbox" id="checkbox1"> Cornell Sponsor
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>
+                                              <input type="checkbox" id="checkbox2"> No Charge
+                                            </label>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <label>
+                                              <input type="checkbox" id="checkbox3"> Free Food
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="us2-address"/>
+                                </div>
+
+                                <div class="form-group location-pickergroup">
+                                    <div class="form-control" id="us2"></div>
+                                </div>
+
+                                <div class="invisible zerosize">
+                                    <input id="us2-lat"/>
+                                </div>
+
+                                <div class="invisible zerosize">
+                                    <input id="us2-lon"/>
+                                </div>
+
+                                <script>$('#us2').locationpicker({
+                                    location: {latitude: 42.444782, longitude: -76.484174},
+                                    radius: 1,
+                                    inputBinding: {
+                                        latitudeInput: $('#us2-lat'),
+                                        longitudeInput: $('#us2-lon'),
+                                        locationNameInput: $('#us2-address')
+                                    },
+                                    enableAutocomplete: true
+                                });</script>
+
+                                <div class="form-group">
+                                    <input type="file" class="form-control" id="image" placeholder="choose some image">
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-lg-12 text-center">
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Detail Description" id="description"></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+
+                            <div id="error-feedback" class="error-info"></div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-xl" id="post-event">Post My Event</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <!-- Custom Header, Footer, Catagory Theme JavaScript -->
+    <script src="js/index.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/bootstrap-timepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/newpost.js"></script>
+
+</body>
+
+</html>

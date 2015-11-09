@@ -9,17 +9,16 @@ var ref = new Firebase("https://event-finder.firebaseio.com/users");
 exports.findAccount = function(req, res) { 
   var accountName = req.body['username'];
 
-  console.log("server get input accountName: " + accountName);
 
   ref.orderByChild("username").equalTo(accountName).once("value", function(snapshot) {
     if (snapshot.numChildren() == 0){
-      console.log("didn't find such user")
-      res.json("not-taken");
+        res.json("not-taken");
     }
     else {
-      snapshot.forEach(function(data) {
-        res.json(data.val().password);
-      });
+        snapshot.forEach(function(data) {
+            res.json(data.val().password);
+            return;
+        });
     }
   });
 }
@@ -34,7 +33,6 @@ exports.nameCheck = function(req, res) {
   var username = req.body['username'];
   var password = req.body['password'];
 
-  console.log("checking username: "+ username);
 
   
   var taken = false;
@@ -53,10 +51,7 @@ exports.nameCheck = function(req, res) {
  */
 exports.addAccount = function(req, res) {
   var form_data = req.body['json'];
-  console.log(form_data);
 
-  // console.log(form_data['username']);
-  // newAccount.save(afterSaving); 
 
   ref.push().set({
     username: form_data['username'],
@@ -70,8 +65,4 @@ exports.addAccount = function(req, res) {
     }
   });
 
-  // function afterSaving(err) {
-  //   if(err) {console.log(err); res.send(500); }
-  //   res.send("OK");
-  // }
 }

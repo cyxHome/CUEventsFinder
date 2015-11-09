@@ -7,7 +7,6 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars');
-var methodOverride = require('method-override');
 
 var signin = require('./routes/signin');
 var index = require('./routes/index');
@@ -17,7 +16,9 @@ var nav = require('./routes/navbar');
 var contactinfo = require('./routes/contactinfo');
 var details = require('./routes/details');
 var searchlist = require('./routes/searchlist');
+var searchhandler = require('./routes/searchevents');
 var account = require('./routes/account');
+var newpost = require('./routes/newpost');
 var Firebase = require("firebase");
 // Example route
 // var user = require('./routes/user');
@@ -33,9 +34,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
-// app.use(express.methodOverride());  // comment because depreciate
 app.use(express.cookieParser('Intro HCI secret key'));
-// app.use(express.session());    // comment because depreciate
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -47,6 +46,7 @@ if ('development' == app.get('env')) {
 // Add routes here
 app.get('/', signin.view);
 app.get('/index', index.view);
+app.get('/newpost', newpost.view);
 app.get('/timeline', timeline.view);
 app.get('/map', map.view);
 app.get('/navbar', nav.view);
@@ -56,6 +56,7 @@ app.get('/searchlist', searchlist.view);
 app.post('/account/add-account', account.addAccount);
 app.post('/account/login', account.findAccount);
 app.post('/account/sign-up-name-check', account.nameCheck);
+app.post('/search-events-by-keyworld', searchhandler.lookupEventsByKeyworld);
 // Example route
 // app.get('/users', user.list);
 

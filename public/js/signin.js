@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
   $('.background-image').on('webkitAnimationEnd', function(e) {
     $(this).addClass('visible');
@@ -8,11 +10,8 @@ $(document).ready(function() {
 	 */
 	$('#newAccountCreateButton').click(function(e) {
 		e.preventDefault(); 
-		console.log('clicked newAccountCreateButton');
 		var username = $('[name="username"]').val();
 		var password = $('[name="password"]').val();
-		console.log("username: " + username);
-		console.log("password: " + password);
 
 		var div = document.getElementById('error-feedback');
 		var successDiv = document.getElementById('success-feedback');
@@ -41,14 +40,11 @@ $(document).ready(function() {
 		// if such email has been found in the database, the user has already sign-up
 		$.post(url_call, { username: username }, function(result) {
 			if (result == "taken") {
-				console.log("taken");
 				div.innerHTML = 'the username has been taken';
 			}
 			else {
-				console.log("not-taken");
 				url_call = '/account/add-account';
 				$.post(url_call, { json: json }, function(result) {
-					console.log("successfully add an account");
 					successDiv.innerHTML = "You has just joined Cornell Event Finder!"
 				});
 			}
@@ -61,11 +57,8 @@ $(document).ready(function() {
 	 */
 	$('#loginRequestSubmitButton').click(function(e) {
 		e.preventDefault(); 
-		console.log('clicked newAccountCreateButton');
 		var username = $('[name="username"]').val();
 		var password = $('[name="password"]').val();
-		console.log("username: " + username);
-		console.log("password: " + password);
 
 		var div = document.getElementById('error-feedback');
 		var wanningDiv = document.getElementById('wanning-feedback');
@@ -92,22 +85,17 @@ $(document).ready(function() {
 		 * Check if the account password match the password that the user has inputed
 		 */
 		function passwordCheck(result) {
-			console.log("accountPassword: " + result);
-			console.log("current cookie: " + document.cookie);
+
 			if (result == "not-taken") {
-				console.log("username not found");
 				wanningDiv.innerHTML = "Can't find username '" + username + "'";
 				return;
 			}
 			if (result == password) {
-				console.log("password match");
-				// document.cookie = "currentAccount = " + account_json['name'] + ";";
-				// redirect the page to logined page
+				document.cookie = "currentAccount = " + username + ";";				
 				window.location.href = '/index'; 
 			}
 			else
 			{   
-				console.log("password not match");
 				div.innerHTML = "wrong password";
 				return;
 			}
