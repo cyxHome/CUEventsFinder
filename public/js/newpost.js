@@ -198,7 +198,8 @@ function storeJsonFile(json, currentAccount) {
 				secondaryTag: json["secondaryTag"],
 				imageOfEvent: json["imageOfEvent"],
 				authorProfileImg: json["authorProfileImg"],
-				restriction: json["restriction"]
+				restriction: json["restriction"],
+				numberOfViewed: 0
 			}, function(error) {
 				if (error) {
 					console.log("Data could not be saved." + error);
