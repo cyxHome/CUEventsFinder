@@ -50,7 +50,6 @@ $(document).ready(function() {
 	$('#post-event').click(function(e) {
 		e.preventDefault(); 
 		var fileInput = document.getElementById('image');
-		var file = fileInput.files[0];
 		var title = $('#title').val();
 		var starting = $('#starting').val();
 		var ending = $('#ending').val();
@@ -145,40 +144,56 @@ $(document).ready(function() {
 			"locationOfEvent": location,
 			"latOfEvent": lat,
 			"lngOfEvent": lng,
-			"file": file,
 			"introOfEvent": description,
 			"authorName": currentAccount,
 			"primaryTag": primaryTag,
 			"secondaryTag": secondaryTag,
-			"imageOfEvent": "",
+			"imageOfEvent": [],
 			"authorProfileImg": "",
 			"restriction": restriction
 		};
 
 		var url_call = '/event/post';
 
+		var imageCount = fileInput.files.length;
+		var imagesLoaded = 0;
 
-		if (file !== undefined) {
-			var reader = new FileReader();
+		var reader = [];
+		
+		for(var i = 0; i < imageCount; i++) {
+			console.log("attaching onload function for " + i);
+			reader.push(new FileReader());
+			var readerTmp = reader[i];
+		    readerTmp.onload = (function(value) { 
+		    	return function() {
+			        imagesLoaded++;
+			        console.log("has loaded " + imagesLoaded);
+			        var imgTmp = reader[value].result;
+					var n = imgTmp.indexOf(",");
+					var imgData = imgTmp.substr(n+1);
+					json["imageOfEvent"].push(imgData);
+			        if(imagesLoaded == imageCount){
+			            storeJsonFile(json, currentAccount);
+			        }
+			    }
+		    })(i);
+		}
 
-			reader.onload = function(e) {
-				var imgTmp = reader.result;
-				var n = imgTmp.indexOf(",");
-				var imgData = imgTmp.substr(n+1);
-				json["imageOfEvent"] = imgData;
-				storeJsonFile(json, currentAccount);
+		if (fileInput.files !== undefined)
+			for (var i = 0; i < imageCount; i++) {
+				console.log("start loading " + i);
+				reader[i].readAsDataURL(fileInput.files[i]);
 			}
-
-			reader.readAsDataURL(file);	
-		}
-		else {
+		else
 			storeJsonFile(json, currentAccount);
-		}
+		
 
 	});
 });
 
+
 function storeJsonFile(json, currentAccount) {
+	console.log("storeJsonFile");
 	usersRef.orderByChild("username").equalTo(currentAccount).once("value", function(snapshot) {
 		snapshot.forEach(function(data) {
         	var authorProfileImg = data.val().usrProfileImage;
