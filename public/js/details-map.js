@@ -4,7 +4,10 @@ var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
 
 function initialize() {
-  var tomark = { lat: 42.446671, lng: -76.485502 };
+  var mapHTML = document.getElementById('details-map');
+  var lat = $(mapHTML).data('lat');
+  var lng = $(mapHTML).data('lng');
+  var tomark = { lat: lat, lng: lng };
   var map = new google.maps.Map(document.getElementById('details-map'), {
     zoom: 16,
     center: tomark

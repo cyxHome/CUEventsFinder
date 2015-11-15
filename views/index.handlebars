@@ -6,11 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>CU Events Finder</title>	
+    <title>Campus Conqueror</title>	
+    <link rel="shortcut icon" href="img/icon-small.png">
 
     <!-- Firebase -->
     <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
-
+    
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 
@@ -26,13 +27,7 @@
     <link href="css/navbar.css" rel="stylesheet">
     <!-- Custom CSS For Popular Events and Category -->
     <link href="css/index.css" rel="stylesheet">
-
     
-    <!-- <link href="css/agency.css" rel="stylesheet"> -->
-
-    <!-- Custom CSS For Header, Catagory, Footer -->
-    <!-- <link rel="stylesheet" href="css/creative.css" type="text/css"> -->
-
     <!-- HTML5 Shim and Resond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -57,7 +52,7 @@
                 <h1>Find all the school events in one place</h1>
                 <hr>
                 <p>Professional events, social events, dance, performance, political, seminar, athletics, Cornell sponsored, everything...</p>
-                <a href="/newpost" class="btn btn-primary btn-xl page-scroll">Post Your Events</a>
+                <a href="/newpost" class="btn btn-primary btn-xl page-scroll hvr-shadow-radial">Post Your Events</a>
             </div>
         </div>
         </div>  
@@ -77,19 +72,17 @@
 
             <div class="row">
             {{#each popular}}
-                <div class="col-md-4 col-sm-6 popular-item">
-                    <a href="{{url}}" class="popular-link" data-toggle="modal">
-                        <div class="popular-hover">
-                            <div class="popular-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 popular-item">
+                    <a href="#" class="event-click hvr-glow" data-internalid="{{id}}">
+                        <div class="popular-caption popular-link">
+                            <h4 class="title">{{title}}</h4>
+                            <p class="text-muted popular-time">{{startingTime}} - {{endingTime}} <br>at {{location}}</p>
+                            <div class="container">
+                                <img src="{{img}}" class="img-responsive hvr-grow-shadow" alt="">
+                            </div>     
+                            <p class="text-muted description-text"><br>{{description}}</p>
                         </div>
-                        <img src="{{img}}" class="img-responsive" alt="">
                     </a>
-                    <div class="popular-caption">
-                        <h4>{{title}}</h4>
-                        <p class="text-muted">{{location}}<br>{{time}}</p>
-                    </div>
                 </div>
             {{/each}}
             </div>
@@ -150,6 +143,7 @@
 
     <!-- load navbar and contact info -->
     <script src="js/index.js"></script>
+    <script src="js/event-click-handler.js"></script>
 
 </body>
 

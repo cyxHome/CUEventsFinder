@@ -53,9 +53,11 @@ $(document).ready(function() {
 		var title = $('#title').val();
 		var starting = $('#starting').val();
 		var ending = $('#ending').val();
+		console.log("starting input: "+starting);
+		console.log("ending input: "+ending);
 		var location = $('#us2-address').val();
-		var lat = $('#us2-lat').val();
-		var lng = $('#us2-lon').val();
+		var lat = Number($('#us2-lat').val());
+		var lng = Number($('#us2-lon').val());
 		var restriction = $('#restriction').val();
 		var description = $('#description').val();
 		var checkbox1 = $('#checkbox1').is(":checked");
@@ -66,11 +68,10 @@ $(document).ready(function() {
 		var errorlog = document.getElementById('error-feedback');
 		errorlog.innerHTML = "";
 
-		/** 
-		 * Process datatime info before store it into database
-		 */
-		function processDateTime(datetime) {
-			var tokens = starting.split(" ");
+		// change the represenation of time from string input into number 
+		// before storing it into database 
+		function inputToNumber(datetime) {
+			var tokens = datetime.split(" ");
 			token1s = tokens[0].split("/");
 			token2s = tokens[1].split(":");
 			// parsing date
@@ -128,13 +129,22 @@ $(document).ready(function() {
 			errorlog.innerHTML = "please specify the description of your event";
 			return;
 		}
+		if (restriction.length == 0) {
+			restriction = "N/A";
+		}
 
-		var startingTime = processDateTime(starting);
-		var endingTime = processDateTime(ending);
+		var startingTime = inputToNumber(starting);
+		var endingTime = inputToNumber(ending);
+		console.log("input to number starting" + startingTime);
+		console.log("input to number ending" + endingTime);
 		var postTime = getDateTime();
 		var currentAccount = getCookie("currentAccount");
 		var secondaryTag = getSecondaryTag(checkbox1, checkbox2, checkbox3);
 		
+		if (endingTime < startingTime) {
+			errorlog.innerHTML = "the ending time shouldn't be earlier than the starting time";
+			return;
+		}
 
 		var json = {
 			"nameOfEvent": title,
@@ -153,12 +163,12 @@ $(document).ready(function() {
 			"restriction": restriction
 		};
 
-		var url_call = '/event/post';
-
 		var imageCount = fileInput.files.length;
 		var imagesLoaded = 0;
 
 		var reader = [];
+
+		console.log("before store json file");
 		
 		for(var i = 0; i < imageCount; i++) {
 			console.log("attaching onload function for " + i);
@@ -186,8 +196,11 @@ $(document).ready(function() {
 			}
 		else
 			storeJsonFile(json, currentAccount);
-		
 
+
+		// alert to tell the user success and redirect to the index page
+		confirm("Your event has been post!");
+		window.location.href = '/index'; 
 	});
 });
 
@@ -199,7 +212,8 @@ function storeJsonFile(json, currentAccount) {
         	var authorProfileImg = data.val().usrProfileImage;
         	if (authorProfileImg !== undefined)
         		json["authorProfileImg"] = authorProfileImg;
-			ref.push().set({
+        	var newRef = ref.push();
+			newRef.set({
 				nameOfEvent: json["nameOfEvent"],
 				startingTime: json["startingTime"],
 				endingTime: json["endingTime"],
@@ -221,9 +235,9 @@ function storeJsonFile(json, currentAccount) {
 				} else {
 					console.log("Data has been saved.");
 				}
-			});
-			return;
-      	});
+			});	
+    	});
+
 	});
 }
 

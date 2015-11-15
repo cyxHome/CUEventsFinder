@@ -2,16 +2,15 @@
   "name": "CUEventsFinder",
   "version": "0.0.1",
   "author": "Yuxin Cao",
-
   "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "express": "3.x",
-    "express3-handlebars": "*"
+    "express3-handlebars": "*",
   },
   "engines": {
     "node": "0.10.x"
-  }  
+  }
 }

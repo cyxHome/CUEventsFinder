@@ -113,7 +113,9 @@
     function getContextForElement(domObj) {
         return $(domObj).data("locationpicker");
     }
+    
     function updateInputValues(inputBinding, gmapContext) {
+
         if (!inputBinding) return;
         var currentLocation = GmUtility.locationFromLatLng(gmapContext.location);
         if (inputBinding.latitudeInput) {
@@ -125,9 +127,10 @@
         if (inputBinding.radiusInput) {
             inputBinding.radiusInput.val(gmapContext.radius).change();
         }
-        if (inputBinding.locationNameInput) {
-            inputBinding.locationNameInput.val(gmapContext.locationName).change();
-        }
+        // comment this function to use the building name instead of the street number
+        // if (inputBinding.locationNameInput) {
+        //     inputBinding.locationNameInput.val(gmapContext.locationName).change();
+        // }
     }
     function setupInputListenersInput(inputBinding, gmapContext) {
         if (inputBinding) {

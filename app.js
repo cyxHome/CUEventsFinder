@@ -53,6 +53,7 @@ app.get('/map', map.view);
 app.get('/navbar', nav.view);
 app.get('/contactinfo', contactinfo.view);
 app.get('/details', details.view);
+app.get('/details/*', details.viewIdAtUrl);
 app.get('/searchlist', searchlist.view);
 app.get('/category/professional', category.viewProfessional);
 app.get('/category/social', category.viewSocial);
@@ -60,10 +61,15 @@ app.get('/category/performance', category.viewPerformance);
 app.get('/category/political', category.viewPolitical);
 app.get('/category/seminars', category.viewSeminars);
 app.get('/category/althletics', category.viewAthletics);
+app.get('/category/freefood', category.viewFreeFood);
+app.get('/category/cornellsponsored', category.viewCornellSponsored);
+app.get('/upcoming', searchhandler.lookupUpcomingEvents);
+app.get('/search-events-by-keyword/*', searchhandler.lookupEventsByKeyword);
+// app.get('/index?searching-events-input=*', searchhandler.lookupEventsByKeyword);
+app.post('/event-details', details.get);
 app.post('/account/add-account', account.addAccount);
 app.post('/account/login', account.findAccount);
 app.post('/account/sign-up-name-check', account.nameCheck);
-app.post('/search-events-by-keyworld', searchhandler.lookupEventsByKeyworld);
 // Example route
 // app.get('/users', user.list);
 

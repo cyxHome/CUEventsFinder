@@ -6,7 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>CU Events Finder</title>	
+    <title>Campus Conqueror</title> 
+    <link rel="shortcut icon" href="img/icon-small.png">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
@@ -17,6 +18,7 @@
     <!-- Custom CSS For Navbar and Contact -->
     <link href="/css/navbar.css" rel="stylesheet">
     <link href="/css/searchlist.css" rel="stylesheet">
+    <link href="/css/hover.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -44,7 +46,7 @@
             <div class="col-md-8">
 
                 <h3 class="page-header">
-                    Professional Events 
+                    {{title}}
                     <small>comming up</small>
                 </h3>
 
@@ -52,7 +54,7 @@
                 <div class="events-list">
 
                     {{#each result}}
-                    <div class="single-event container" ><a href="{{url}}">
+                    <div class="single-event container hvr-glow" ><a href="{{url}}" class="event-click"  data-internalid="{{id}}">
                     
                         <div class="single-event-img"> 
                             <img clsss="single-event-img-src" src="{{img}}" alt="something">
@@ -92,48 +94,26 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Professonial</a>
+                                <li><a href="/category/professional">Professonial Events</a>
                                 </li>
-                                <li><a href="#">Cornell Sponsor</a>
+                                <li><a href="/category/social">Social Events</a>
                                 </li>
-                                <li><a href="#">Sport</a>
+                                <li><a href="/category/performance">Performance Events</a>
                                 </li>
-                                <li><a href="#">Music</a>
+                                <li><a href="/category/political">Political Events</a>
                                 </li>
                             </ul>
                         </div>
                         <!-- /.col-lg-6 -->
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
+                                <li><a href="/category/seminars">Seminars Events</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                                <li><a href="/category/athletics">Athletics Events</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                                <li><a href="/category/freefood">Free Food</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-
-                <!-- Popular Events -->
-                <div class="well">
-                    <h4>Popular Events</h4>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Steve Jobs -- FREE SNEAK PREVIEW</a>
-                                </li>
-                                <li><a href="#">Frank Warren: Post Secret</a>
-                                </li>
-                                <li><a href="#">Nightmare at Edgemoor Lane</a>
-                                </li>
-                                <li><a href="#">Global Health Experiential Learning Symposium</a>
+                                <li><a href="/category/cornellsponsored">Cornell Sponsored</a>
                                 </li>
                             </ul>
                         </div>
@@ -141,8 +121,6 @@
                     </div>
                     <!-- /.row -->
                 </div>
-
-
 
             </div>
             <!-- Side bar ends here -->
@@ -170,6 +148,7 @@
 
     <!-- Custom Header, Footer, Catagory Theme JavaScript -->
     <script src="/js/searchlist.js"></script>
+    <script src="/js/event-click-handler.js"></script>
 
 
 </body>

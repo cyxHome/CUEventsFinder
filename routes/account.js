@@ -55,7 +55,15 @@ exports.addAccount = function(req, res) {
 
   ref.push().set({
     username: form_data['username'],
-    password: form_data['password']
+    password: form_data['password'],
+    age: 20,
+    gender: "",
+    interests: ["None"],
+    myPostNumber: 0,
+    myAttendenceNumber: 0,
+    nickname: "",
+    usrProfileImage: "",
+    whatsup: ""
   }, function(error) {
     if (error) {
       console.log("Data could not be saved." + error);

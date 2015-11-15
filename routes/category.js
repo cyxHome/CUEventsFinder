@@ -1,35 +1,6 @@
 var Firebase = require("firebase");
+var timeprocessing = require('./timeprocessing.js');
 var ref = new Firebase("https://event-finder.firebaseio.com/events");
-
-function processDateTime(time) {
-	var minutes = time % 100;
-	var result = ("0" + minutes).slice(-2);
-	time /= 100;
-	var hours = time % 100;
-	if (hours > 12) {
-		result += "PM";
-		hours -= 12;
-	}
-	else {
-		result += "AM"
-	}
-	hours = ("0" + hours).slice(-2);
-	result = hours + ":" + result;
-	time /= 100;
-	var days = processMonthDay(time % 100);
-	time /= 100;
-	var months = processMonthDay(time % 100);
-	time /= 100;
-	var years = time % 10000;
-	result = months + "/" + days + "/" + (""+years).slice(0,4) + " " + result;
-	console.log("process date time result: " + result);
-	return result;
-}
-
-function processMonthDay(input) {
-	var tmp = (""+input).split(".");
-	return ("0" + tmp[0]).slice(-2);
-}
 
 function getCategoryData(res, start, length, category) {
 	console.log("getting category: " + category);
@@ -39,16 +10,57 @@ function getCategoryData(res, start, length, category) {
 		};
 		snapshot.forEach(function(data) {
         	var tmp = {
-        		"img": "data:image/png;base64," + data.val().imageOfEvent,
-        		"startingTime": processDateTime(data.val().startingTime),
-        		"endingTime": processDateTime(data.val().endingTime),
+        		"id": data.key(),
+        		"startingTime": timeprocessing.numberToText(data.val().startingTime),
+        		"endingTime": timeprocessing.numberToText(data.val().endingTime),
         		"title": data.val().nameOfEvent,
         		"location": data.val().locationOfEvent
         	};
+        	if (data.val().imageOfEvent[0] != null) {
+        		tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
+        	}
         	result["result"].push(tmp);
 
+
       	});
-  	    console.log(result);
+      	result["title"] = category;
+		res.render('searchlist', result);
+		return;
+	});
+}
+
+function getCategoryDataWithSecondary(res, start, length, category) {
+	ref.limitToFirst(length).once("value", function(snapshot) {
+		var result = {
+			"result": []
+		};
+		snapshot.forEach(function(data) {
+			var match = false;
+			if (data.val().secondaryTag != null) {
+				for (var i = 0; data.val().secondaryTag[i] != null; ++i) {
+					console.log("testing: " + data.val().secondaryTag[i] );
+					if (data.val().secondaryTag[i] === category) {
+						match = true;
+						break;
+					}
+				}
+
+				if (match) {
+		        	var tmp = {
+		        		"id": data.key(),
+		        		"startingTime": timeprocessing.numberToText(data.val().startingTime),
+		        		"endingTime": timeprocessing.numberToText(data.val().endingTime),
+		        		"title": data.val().nameOfEvent,
+		        		"location": data.val().locationOfEvent
+		        	};
+		        	if (data.val().imageOfEvent[0] != null) {
+		        		tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
+		        	}
+		        	result["result"].push(tmp);
+				} 
+			}
+      	});
+      	result["title"] = category;
 		res.render('searchlist', result);
 		return;
 	});
@@ -77,7 +89,18 @@ exports.viewSeminars = function(req, res){
 	getCategoryData(res, 0, 10, "Seminars");
 };
 
-
 exports.viewAthletics = function(req, res){
 	getCategoryData(res, 0, 10, "Althetics");
 };
+
+exports.viewFreeFood = function(req, res){
+	getCategoryDataWithSecondary(res, 0, 10, "Free Food");
+};
+
+exports.viewCornellSponsored = function(req, res){
+	getCategoryDataWithSecondary(res, 0, 10, "Cornell Sponsored");
+};
+
+
+
+

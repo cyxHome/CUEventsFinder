@@ -757,21 +757,52 @@ body {
 
 
 
-
+#popular .row {
+    margin-right: auto;
+    margin-left: auto;
+}
 
 
 /* popular items */
 #popular .popular-item {
-    right: 0;
-    margin: 0 0 15px;
+    width: 380px;
+    /*right: 0;*/
+    /*margin: 0 0 15px;*/
+
+}
+
+.#popular .popular-item a {
+    width: 100%;
 }
 
 #popular .popular-item .popular-link {
     display: block;
     position: relative;
     margin: 0 auto;
-    max-width: 400px;
+    width: 100%;
 }
+
+/*overflow: hidden; part. It prevents any image that is 
+larger than the crop area from being displayed.*/
+#popular .popular-caption .container {
+    width: 100%; 
+    padding: 0;
+    height: 150px; 
+    overflow: hidden; 
+    /*height: 140px;*/
+}
+
+/* Adding width: 100%; is only helpful when the user uploads an i
+mage smaller than the are you want cropped. */
+#popular .popular-caption .container img {
+    width: 100%; 
+}
+
+#popular .popular-item a:hover {
+  text-decoration:none;
+  /*color:pink;*/
+}
+
 
 #popular .popular-item .popular-link .popular-hover {
     position: absolute;
@@ -810,23 +841,53 @@ body {
 
 #popular .popular-item .popular-caption {
     margin: 0 auto;
-    padding: 25px;
+    padding: 15px;
     max-width: 400px;
-    text-align: center;
+    text-align: left;
     background-color: #fff;
+    height: 35  0px;
 }
 
-#popular .popular-item .popular-caption h4 {
+#popular .popular-item .popular-caption .title {
     margin: 0;
     text-transform: none;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* number of lines to show */
 }
 
 #popular .popular-item .popular-caption p {
     margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 16px;
+    font-size: 10px;
     font-style: italic;
+/*    text-overflow: ellipsis;
+    max-width: 200px;*/
 }
+
+#popular .popular-item .popular-caption .popular-time {
+    height: 40px;
+}
+
+/*#popular .popular-item .popular-caption .popular-image {
+    /*margin-top: 50px;*/
+    /*height: 200px;*/
+/*}*/
+
+#popular .popular-item .popular-caption .description-text {
+    height: 53px;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3; /* number of lines to show */
+}
+
 
 #popular * {
     z-index: 2;
@@ -900,3 +961,85 @@ body {
         font-size: 22px;
     }
 }
+
+/* Shadow Radial */
+.hvr-shadow-radial {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+.hvr-shadow-radial:before, .hvr-shadow-radial:after {
+  pointer-events: none;
+  position: absolute;
+  content: '';
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  height: 5px;
+  opacity: 0;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+.hvr-shadow-radial:before {
+  bottom: 100%;
+  background: -webkit-radial-gradient(50% 150%, ellipse, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at 50% 150%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);
+}
+.hvr-shadow-radial:after {
+  top: 100%;
+  background: -webkit-radial-gradient(50% -50%, ellipse, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at 50% -50%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);
+}
+.hvr-shadow-radial:hover:before, .hvr-shadow-radial:focus:before, .hvr-shadow-radial:active:before, .hvr-shadow-radial:hover:after, .hvr-shadow-radial:focus:after, .hvr-shadow-radial:active:after {
+  opacity: 1;
+}
+
+/* Glow */
+.hvr-glow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow;
+  transition-property: box-shadow;
+}
+.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Grow Shadow */
+.hvr-grow-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+}
+.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+

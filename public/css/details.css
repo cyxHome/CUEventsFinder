@@ -100,6 +100,20 @@ hr {
     background: rgba(255,255,255,0.9);
 }
 
+.box-inner {
+    /*height: 100%;*/
+    height: 600px;
+    overflow: hidden; 
+}
+
+.carousel {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
 .intro-text {
     text-transform: uppercase;
     font-size: 1.25em;
@@ -114,7 +128,7 @@ hr {
 }
 
 .img-left {
-    float: none;
+    float: left;
     margin: 0 auto 0;
 }
 
@@ -148,6 +162,8 @@ footer p {
 
     .img-left {
         float: left;
+        width: 400px;
+        height: auto;
         margin-right: 25px;
     }
 
@@ -172,4 +188,17 @@ footer p {
         display: table;
         clear: both;
     }
+}
+
+.zerosize {
+    width: 0px;
+    height: 0px;
+}
+
+.brand {
+    margin-top: 50px;
+}
+
+.location-box {
+    height: 600px;
 }
