@@ -232,6 +232,9 @@ function storeJsonFile(json, currentAccount) {
 					console.log("Data could not be saved." + error);
 				} else {
 					console.log("Data has been saved.");
+					// alert to tell the user success and redirect to the index page
+					confirm("Your event has been post!");
+					window.location.href = '/index'; 
 				}
 			});	
     	});
@@ -240,9 +243,7 @@ function storeJsonFile(json, currentAccount) {
 
 	});
 
-    // alert to tell the user success and redirect to the index page
-	confirm("Your event has been post!");
-	window.location.href = '/index'; 
+
 }
 
 function getCookie(cname) {
@@ -259,7 +260,7 @@ function getCookie(cname) {
 function getSecondaryTag(first, second, third) {
 	var result = [];
 	if (first)
-		result.push("Cornell Sponsor");
+		result.push("Cornell Sponsored");
 	if (second)
 		result.push("No Charge");
 	if (third)
