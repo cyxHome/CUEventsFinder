@@ -1,5 +1,5 @@
 var Firebase = require("firebase");
-var timeprocessing = require('./timeprocessing.js');
+var processData = require('./processData.js');
 var ref = new Firebase("https://event-finder.firebaseio.com/events");
 
 
@@ -19,17 +19,7 @@ exports.lookupEventsByKeyword = function(req, res) { 
       snapshot.forEach(function(data) {
 
         if (data.val().introOfEvent.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
-          var tmp = {
-            "id": data.key(),
-            "startingTime": timeprocessing.numberToText(data.val().startingTime),
-            "endingTime": timeprocessing.numberToText(data.val().endingTime),
-            "title": data.val().nameOfEvent,
-            "location": data.val().locationOfEvent
-          };
-          if (data.val().imageOfEvent[0] != null) {
-            tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
-          }
-          result["result"].push(tmp);
+            result["result"].push(processData.processSearchListData(data));
         }
       });
       result["title"] = "Events matching " + keyword;
@@ -54,24 +44,14 @@ exports.lookupEventsByKeyword = function(req, res) { 
   return total;
  }
 
+
 exports.lookupUpcomingEvents = function(req, res) {
   ref.orderByChild("startingTime").startAt(getDate()).limitToFirst(10).once("value", function(snapshot) {
-
       var result = {
           "result": []
       }
       snapshot.forEach(function(data) {
-        var tmp = {
-            "id": data.key(),
-            "startingTime": timeprocessing.numberToText(data.val().startingTime),
-            "endingTime": timeprocessing.numberToText(data.val().endingTime),
-            "title": data.val().nameOfEvent,
-            "location": data.val().locationOfEvent
-          };
-          if (data.val().imageOfEvent[0] != null) {
-            tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
-          }
-          result["result"].push(tmp);
+          result["result"].push(processData.processSearchListData(data));
       });
       result["title"] = "Events";
       res.render('searchlist', result);

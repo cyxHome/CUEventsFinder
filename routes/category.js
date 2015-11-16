@@ -1,27 +1,15 @@
 var Firebase = require("firebase");
-var timeprocessing = require('./timeprocessing.js');
-var ref = new Firebase("https://event-finder.firebaseio.com/events");
+var processData = require('./processData.js');
+var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
 
 function getCategoryData(res, start, length, category) {
 	console.log("getting category: " + category);
-	ref.orderByChild("primaryTag").equalTo(category).limitToFirst(length).once("value", function(snapshot) {
+	eventRef.orderByChild("primaryTag").equalTo(category).limitToFirst(length).once("value", function(snapshot) {
 		var result = {
 			"result": []
 		};
 		snapshot.forEach(function(data) {
-        	var tmp = {
-        		"id": data.key(),
-        		"startingTime": timeprocessing.numberToText(data.val().startingTime),
-        		"endingTime": timeprocessing.numberToText(data.val().endingTime),
-        		"title": data.val().nameOfEvent,
-        		"location": data.val().locationOfEvent
-        	};
-        	if (data.val().imageOfEvent[0] != null) {
-        		tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
-        	}
-        	result["result"].push(tmp);
-
-
+        	result["result"].push(processData.processSearchListData(data));
       	});
       	result["title"] = category;
 		res.render('searchlist', result);
@@ -30,7 +18,7 @@ function getCategoryData(res, start, length, category) {
 }
 
 function getCategoryDataWithSecondary(res, start, length, category) {
-	ref.limitToFirst(length).once("value", function(snapshot) {
+	eventRef.limitToFirst(length).once("value", function(snapshot) {
 		var result = {
 			"result": []
 		};
@@ -44,19 +32,8 @@ function getCategoryDataWithSecondary(res, start, length, category) {
 						break;
 					}
 				}
-
 				if (match) {
-		        	var tmp = {
-		        		"id": data.key(),
-		        		"startingTime": timeprocessing.numberToText(data.val().startingTime),
-		        		"endingTime": timeprocessing.numberToText(data.val().endingTime),
-		        		"title": data.val().nameOfEvent,
-		        		"location": data.val().locationOfEvent
-		        	};
-		        	if (data.val().imageOfEvent[0] != null) {
-		        		tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
-		        	}
-		        	result["result"].push(tmp);
+		        	result["result"].push(processData.processSearchListData(data));
 				} 
 			}
       	});

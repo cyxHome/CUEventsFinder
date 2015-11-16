@@ -1,4 +1,4 @@
-var ref = new Firebase("https://event-finder.firebaseio.com/events");
+var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
 var usersRef = new Firebase("https://event-finder.firebaseio.com/users");
 
 
@@ -189,7 +189,7 @@ $(document).ready(function() {
 		    })(i);
 		}
 
-		if (fileInput.files !== undefined)
+		if (imageCount > 0)
 			for (var i = 0; i < imageCount; i++) {
 				console.log("start loading " + i);
 				reader[i].readAsDataURL(fileInput.files[i]);
@@ -198,9 +198,7 @@ $(document).ready(function() {
 			storeJsonFile(json, currentAccount);
 
 
-		// alert to tell the user success and redirect to the index page
-		confirm("Your event has been post!");
-		window.location.href = '/index'; 
+
 	});
 });
 
@@ -212,7 +210,7 @@ function storeJsonFile(json, currentAccount) {
         	var authorProfileImg = data.val().usrProfileImage;
         	if (authorProfileImg !== undefined)
         		json["authorProfileImg"] = authorProfileImg;
-        	var newRef = ref.push();
+        	var newRef = eventRef.push();
 			newRef.set({
 				nameOfEvent: json["nameOfEvent"],
 				startingTime: json["startingTime"],
@@ -238,7 +236,13 @@ function storeJsonFile(json, currentAccount) {
 			});	
     	});
 
+
+
 	});
+
+    // alert to tell the user success and redirect to the index page
+	confirm("Your event has been post!");
+	window.location.href = '/index'; 
 }
 
 function getCookie(cname) {

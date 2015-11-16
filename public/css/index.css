@@ -842,7 +842,7 @@ mage smaller than the are you want cropped. */
 #popular .popular-item .popular-caption {
     margin: 0 auto;
     padding: 15px;
-    max-width: 400px;
+    max-width: 350px;
     text-align: left;
     background-color: #fff;
     height: 35  0px;
@@ -907,6 +907,8 @@ mage smaller than the are you want cropped. */
     position: relative;
     margin: 0 auto;
     max-width: 650px;
+    max-height: 260px;
+    overflow: hidden;
 }
 
 .category-box .category-box-caption {

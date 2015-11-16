@@ -2,37 +2,37 @@
 	"category": [
 		{
 			"id": "category1",
-			"img": "img/category/1.jpg",
+			"img": "img/category/Professional.jpg",
 			"title": "Professional Events",
 			"url": "/category/professional"
 		},
 		{
 			"id": "category2",
-			"img": "img/category/2.jpg",
+			"img": "img/category/Social.jpg",
 			"title": "Social Events",
 			"url": "/category/social"
 		},
 		{
 			"id": "category3",
-			"img": "img/category/3.jpg",
+			"img": "img/category/Performance.jpg",
 			"title": "Performance Events",
 			"url": "/category/performance"
 		},
 		{
 			"id": "category4",
-			"img": "img/category/4.jpg",
+			"img": "img/category/Political.jpg",
 			"title": "Political Events",
 			"url": "/category/political"
 		},
 		{
 			"id": "category5",
-			"img": "img/category/5.jpg",
+			"img": "img/category/Seminars.jpg",
 			"title": "Seminars",
 			"url": "/category/seminars"
 		},
 		{
 			"id": "category6",
-			"img": "img/category/6.jpg",
+			"img": "img/category/Athletics.jpg",
 			"title": "Athletics",
 			"url": "/category/athletics"
 		}
