@@ -871,7 +871,20 @@ mage smaller than the are you want cropped. */
 }
 
 #popular .popular-item .popular-caption .popular-time {
-    height: 40px;
+    height: 15px;
+    display: inline-block;
+}
+
+#popular .popular-item .popular-caption .tag-label {
+    float: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /*font-size: 10px;*/
+}
+
+#popular .popular-item .popular-caption .popular-location {
+    height: 25px;
+    padding-bottom: 5px;
 }
 
 /*#popular .popular-item .popular-caption .popular-image {
@@ -920,7 +933,7 @@ mage smaller than the are you want cropped. */
     text-align: center;
     color: #fff;
     opacity: 0;
-    background: rgba(240,95,64,.9);
+    /*background: rgba(240,95,64,.9);*/
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;

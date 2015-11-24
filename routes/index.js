@@ -21,8 +21,6 @@ exports.view = function(req, res){
 		};
 		snapshot.forEach(function(data) {
             var tmp = processData.processSearchListData(data);
-            tmp["description"] = data.val().introOfEvent;
-            tmp["numberOfViewed"] = data.val().numberOfViewed;
             // put the most viewed element to the front
         	popular["popular"].unshift(tmp);
             // console.log("time of View: " + data.val().numberOfViewed);

@@ -76,11 +76,14 @@
                     <a href="#" class="event-click hvr-glow" data-internalid="{{id}}">
                         <div class="popular-caption popular-link">
                             <h4 class="title">{{title}}</h4>
-                            <p class="text-muted popular-time">{{startingTime}} - {{endingTime}} <br>at {{location}}</p>
+                                <p class="text-muted popular-time">{{startingTime}} - {{endingTime}} </p>
+                                <!-- <p class="text-muted popular-tag"> tag </p> -->
+                                <p class="text-muted popular-location">at {{location}}</p>
                             <div class="container">
                                 <img src="{{img}}" class="img-responsive hvr-grow-shadow" alt="">
                             </div>     
-                            <p class="text-muted description-text"><br>{{description}}</p>
+                            
+                            <p class="text-muted description-text"><br><span class="label label-default tag-label" style="background-color: {{categoryColor}}">{{category}}</span>{{description}}</p>
                         </div>
                     </a>
                 </div>
@@ -108,7 +111,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <a href="{{url}}" class="category-box">
                         <img src="{{img}}" class="img-responsive" alt="">
-                        <div class="category-box-caption">
+                        <div class="category-box-caption" style="background: {{categoryColor}}">
                             <div class="category-box-caption-content">
                                 <div class="project-category text-faded">
                                     <!-- Catagory -->

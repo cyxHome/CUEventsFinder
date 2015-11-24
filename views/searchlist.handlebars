@@ -61,8 +61,10 @@
                         </div>
 
                         <div class="single-event-text"> 
-                            <p class="time">{{startingTime}} - {{endingTime}}</p> 
-                            <h4 class="title">{{title}}<br> </h4>
+                            <p class="time"><span class="label label-default tag-label" style="background-color: {{categoryColor}}">{{category}}</span>{{startingTime}} - {{endingTime}}</p> 
+                            <h4 class="title">{{title}}</h4>
+                            
+                            <p class="description-text">{{description}}</p>
                             <div class="location">{{location}}<br> </div>
                         </div> 
 

@@ -39,14 +39,16 @@ h6 {
 .single-event-img {
 	float:left;
 	width: 200px;
-	height: 100px;
+	height: 120px;
 	position: relative;
 	margin-right: 15px;
+    margin-top: 10px;
     overflow: hidden;
 }
 
 .single-event-img img {
 	width: 100%;
+    height: 100%;
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
@@ -69,8 +71,8 @@ h6 {
     float: none;
     font-weight: bold;
     text-transform: none;
-    height: 50px;
-    max-height: 50px;
+    height: 20px;
+    max-height: 20px;
     margin-top: 0;
 }
 
@@ -81,4 +83,21 @@ h6 {
 
 .wells {
     margin-top: 95px;
+}
+
+.text-muted {
+    color: #777;
+}
+
+.description-text {
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* number of lines to show */
+}
+
+.tag-label {
+    float: right;
 }
