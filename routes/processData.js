@@ -46,7 +46,8 @@ exports.processSearchListData = function(data) {
         "category": getCategoryImgName(data.val().primaryTag),
         "categoryColor": getCategoryColor(data.val().primaryTag),
         "description": data.val().introOfEvent,
-        "numberOfViewed": data.val().numberOfViewed
+        "numberOfViewed": data.val().numberOfViewed,
+        "url": "/details/" + data.key()
       };
       if (data.val().imageOfEvent != null) 
         tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];

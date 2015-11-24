@@ -920,7 +920,7 @@ mage smaller than the are you want cropped. */
     position: relative;
     margin: 0 auto;
     max-width: 650px;
-    max-height: 260px;
+    max-height: 235px;
     overflow: hidden;
 }
 
