@@ -22,7 +22,10 @@ var currentDateStarting = getDate();
 var currentDateEnding = getDate() + 9999;
 
 exports.view = function(req, res){
-	eventRef.orderByChild("startingTime").startAt(currentDateStarting).endAt(currentDateEnding).once("value", function(snapshot) {
+	// for real use
+	// eventRef.orderByChild("startingTime").startAt(currentDateStarting).endAt(currentDateEnding).once("value", function(snapshot) {
+	// for demo
+	eventRef.orderByChild("startingTime").once("value", function(snapshot) {
 		var current = {
 			"current": []
 		};
