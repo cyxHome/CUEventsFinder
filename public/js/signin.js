@@ -1,9 +1,7 @@
 
 
 $(document).ready(function() {
-  $('.background-image').on('webkitAnimationEnd', function(e) {
-    $(this).addClass('visible');
-  });
+
 
   /**
 	 * Sign up (listening to the submit button in sign-up-form)
