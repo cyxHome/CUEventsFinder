@@ -41,8 +41,9 @@ function initialize() {
 
   console.log("filtering events start from: " + currentDateStarting + " ending at: " + currentDateEnding);
 
-
-  eventsRef.orderByChild("startingTime").startAt(currentDateStarting).endAt(currentDateEnding).once("value", function(snapshot) {
+  
+  // eventsRef.orderByChild("startingTime").startAt(currentDateStarting).endAt(currentDateEnding).once("value", function(snapshot) {
+  eventsRef.orderByChild("startingTime").once("value", function(snapshot) {
     snapshot.forEach(function(data) {
       if (typeof data.val().latOfEvent === "number" && 
           typeof data.val().lngOfEvent === "number") {
