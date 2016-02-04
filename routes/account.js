@@ -1,5 +1,6 @@
 var Firebase = require("firebase");
-var ref = new Firebase("https://event-finder.firebaseio.com/users");
+// var ref = new Firebase("https://event-finder.firebaseio.com/users");
+var ref = new Firebase("https://event-finder-test.firebaseio.com/users");
 
 
 

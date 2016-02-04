@@ -1,5 +1,7 @@
-var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
-var usersRef = new Firebase("https://event-finder.firebaseio.com/users");
+// var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
+var eventRef = new Firebase("https://event-finder-test.firebaseio.com/events");
+// var usersRef = new Firebase("https://event-finder.firebaseio.com/users");
+var usersRef = new Firebase("https://event-finder-test.firebaseio.com/users");
 
 
 $(document).ready(function() {

@@ -1,7 +1,7 @@
 var Firebase = require("firebase");
 var processData = require('./processData.js');
-var ref = new Firebase("https://event-finder.firebaseio.com/events");
-
+// var ref = new Firebase("https://event-finder.firebaseio.com/events");
+var ref = new Firebase("https://event-finder-test.firebaseio.com/events");
 
 /**
  * Look up all events matching the keyword

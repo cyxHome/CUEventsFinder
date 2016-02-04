@@ -2,7 +2,9 @@
 var category = require('../data/category.json');
 var Firebase = require("firebase");
 var processData = require('./processData.js');
-var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
+// var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
+var eventRef = new Firebase("https://event-finder-test.firebaseio.com/events");
+
 
 // get the 6 most viewed events from the databse 
 
