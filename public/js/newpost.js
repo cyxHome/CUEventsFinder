@@ -38,6 +38,8 @@ function get_signed_request(file, json, currentAccount){
 
 
 function upload_file(file, signed_request, url, json, currentAccount){
+	console.log("signed_request")
+	console.log(signed_request)
     var xhr = new XMLHttpRequest();
     xhr.open("PUT", signed_request);
     xhr.setRequestHeader('x-amz-acl', 'public-read');
@@ -60,17 +62,6 @@ $(document).ready(function() {
 	$('#datetimepicker2').datetimepicker();
 
 	var primaryTag;
-
-    // document.getElementById("image").onchange = function(){
-    //     var files = document.getElementById("image").files;
-    //     var file = files[0];
-    //     if(file == null){
-    //         alert("No file selected.");
-    //     }
-    //     else{
-    //         get_signed_request(file);
-    //     }
-    // };
 
 	$('#tag1').click(function(e) {
 		e.preventDefault(); 
@@ -171,29 +162,29 @@ $(document).ready(function() {
 		 	return total;
 		 }
 
-		// if (title.length == 0) {
-		// 	errorlog.innerHTML = "please specify the title of your event";
-		// 	return;
-		// }
-		// if (starting.length == 0) {
-		// 	errorlog.innerHTML = "please specify the starting time of your event";
-		// 	return;
-		// }
-		// if (ending.length == 0) {
-		// 	errorlog.innerHTML = "please specify the ending time of your event";
-		// 	return;
-		// }
-		// if (primaryTag == undefined) {
-		// 	errorlog.innerHTML = "please specify the Tag of your event";
-		// 	return;
-		// }
-		// if (description.length == 0) {
-		// 	errorlog.innerHTML = "please specify the description of your event";
-		// 	return;
-		// }
-		// if (restriction.length == 0) {
-		// 	restriction = "N/A";
-		// }
+		if (title.length == 0) {
+			errorlog.innerHTML = "please specify the title of your event";
+			return;
+		}
+		if (starting.length == 0) {
+			errorlog.innerHTML = "please specify the starting time of your event";
+			return;
+		}
+		if (ending.length == 0) {
+			errorlog.innerHTML = "please specify the ending time of your event";
+			return;
+		}
+		if (primaryTag == undefined) {
+			errorlog.innerHTML = "please specify the Tag of your event";
+			return;
+		}
+		if (description.length == 0) {
+			errorlog.innerHTML = "please specify the description of your event";
+			return;
+		}
+		if (restriction.length == 0) {
+			restriction = "N/A";
+		}
 
 		var startingTime = inputToNumber(starting);
 		var endingTime = inputToNumber(ending);
@@ -233,62 +224,22 @@ $(document).ready(function() {
 		console.log("before store json file");
 
 
-		// var newinput = document.getElementById("resized_img");
-		// var blob = dataURItoBlob(newinput.value);
-		// var fd = new FormData(document.forms[0]);
-		// fd.id = "resized_form";
-		// fd.type = "image/jpeg";
-		// fd.append("canvasImage", blob)
-        // console.log(fd);
-        // var files = fd.files
-        // var file = fd;
+		var newinput = document.getElementById("resized_img");
+		var blob = dataURItoBlob(newinput.value);
+       
 
-		var files = document.getElementById("image").files;
-		
-        var file = files[0];
-        
-
-        
-
-        console.log(file)
-        if(file == null){
+        console.log(blob)
+        if(blob == null){
             alert("No image selected.");
         }
         else{
-            get_signed_request(file, json, currentAccount);
+            get_signed_request(blob, json, currentAccount);
         }
-		
-		// for(var i = 0; i < imageCount; i++) {
-		// 	console.log("attaching onload function for " + i);
-		// 	reader.push(new FileReader());
-		// 	var readerTmp = reader[i];
-		//     readerTmp.onload = (function(value) { 
-		//     	return function() {
-		// 	        imagesLoaded++;
-		// 	        console.log("has loaded " + imagesLoaded);
-		// 	        var imgTmp = reader[value].result;
-		// 			var n = imgTmp.indexOf(",");
-		// 			var imgData = imgTmp.substr(n+1);
-		// 			json["imageOfEvent"].push(imgData);
-		// 	        if(imagesLoaded == imageCount){
-		// 	            storeJsonFile(json, currentAccount);
-		// 	        }
-		// 	    }
-		//     })(i);
-		// }
-
-		// if (imageCount > 0)
-		// 	for (var i = 0; i < imageCount; i++) {
-		// 		console.log("start loading " + i);
-		// 		reader[i].readAsDataURL(fileInput.files[i]);
-		// 	}
-		// else
-		// 	storeJsonFile(json, currentAccount);
-
-
 
 	});
 });
+
+
 
 
 function storeJsonFile(json, currentAccount) {
@@ -374,7 +325,6 @@ console.log("fileInput: " + fileinput)
 console.log("max_width: " + max_width)
 console.log("max_height: " + max_height)
 
-// var preview = document.getElementById('preview');
 
 var form = document.getElementById('form');
 
@@ -399,13 +349,12 @@ function processfile(file) {
       // helper Image object
       var image = new Image();
       image.src = blobURL;
-      // preview.appendChild(image); // preview commented out, I am using the canvas instead
       image.onload = function() {
         // have to wait till it's loaded
         var resized = resizeMe(image); // send it to canvas
         var newinput = document.createElement("input");
         newinput.id = "resized_img";
-        newinput.type = 'image/jpeg';
+        newinput.type = 'hidden';
         newinput.name = 'images[]';
         newinput.value = resized; // put result from canvas into new hidden input
         console.log(fileinput.files[0]);
@@ -435,6 +384,15 @@ function dataURItoBlob(dataURI) {
     return new Blob([ia], {type:mimeString});
 }
 
+// function dataURItoBlob(dataURI) {
+//     var binary = atob(dataURI.split(',')[1]);
+//     var array = [];
+//     for(var i = 0; i < binary.length; i++) {
+//         array.push(binary.charCodeAt(i));
+//     }
+//     return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+// }
+
 function readfiles(files) {
   
     // remove the existing canvases and hidden inputs if user re-selects new pics
@@ -445,9 +403,7 @@ function readfiles(files) {
     while (existinginputs.length > 0) { // it's a live list so removing the first element each time
       // DOMNode.prototype.remove = function() {this.parentNode.removeChild(this);}
       form.removeChild(existinginputs[0]);
-      preview.removeChild(existingcanvases);
       console.log(existingcanvases)
-      // preview.removeChild(childNodes[0])
     } 
   
     for (var i = 0; i < files.length; i++) {
@@ -507,7 +463,6 @@ function resizeMe(img) {
   var ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0, width, height);
   
-  preview.appendChild(canvas); // do the actual resized preview
   
   return canvas.toDataURL("image/jpeg",0.7); // get the data from canvas as 70% JPG (can be also PNG, etc.)
 
