@@ -3,6 +3,56 @@ var eventRef = new Firebase("https://event-finder-test.firebaseio.com/events");
 // var usersRef = new Firebase("https://event-finder.firebaseio.com/users");
 var usersRef = new Firebase("https://event-finder-test.firebaseio.com/users");
 
+// create a good ramdom number as the name for the file
+function guid() {
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
+
+function s4() {
+  return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+}
+
+function get_signed_request(file, json, currentAccount){
+    var xhr = new XMLHttpRequest();
+    // obtain a signed PUT request for the file
+    var name = guid()
+    // console.log("/sign_s3?file_name="+name+"."+file.type.split('/').pop()+"&file_type="+file.type)
+    xhr.open("GET", "/sign_s3?file_name="+name+"."+file.type.split('/').pop()+"&file_type="+file.type);
+    // xhr.open("GET", "/sign_s3?file_name="+name)
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                var response = JSON.parse(xhr.responseText);
+                upload_file(file, response.signed_request, response.url, json, currentAccount);
+            }
+            else{
+                alert("Could not get signed URL.");
+            }
+        }
+    };
+    xhr.send();
+}
+
+
+function upload_file(file, signed_request, url, json, currentAccount){
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", signed_request);
+    xhr.setRequestHeader('x-amz-acl', 'public-read');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+        	// alert("uploaded file " + url);
+        	json["imageOfEvent"].push(url);
+        	storeJsonFile(json, currentAccount);
+        }
+    };
+    xhr.onerror = function() {
+        alert("Could not upload file.");
+    };
+    xhr.send(file);
+}
 
 $(document).ready(function() {
 
@@ -11,6 +61,16 @@ $(document).ready(function() {
 
 	var primaryTag;
 
+    // document.getElementById("image").onchange = function(){
+    //     var files = document.getElementById("image").files;
+    //     var file = files[0];
+    //     if(file == null){
+    //         alert("No file selected.");
+    //     }
+    //     else{
+    //         get_signed_request(file);
+    //     }
+    // };
 
 	$('#tag1').click(function(e) {
 		e.preventDefault(); 
@@ -111,29 +171,29 @@ $(document).ready(function() {
 		 	return total;
 		 }
 
-		if (title.length == 0) {
-			errorlog.innerHTML = "please specify the title of your event";
-			return;
-		}
-		if (starting.length == 0) {
-			errorlog.innerHTML = "please specify the starting time of your event";
-			return;
-		}
-		if (ending.length == 0) {
-			errorlog.innerHTML = "please specify the ending time of your event";
-			return;
-		}
-		if (primaryTag == undefined) {
-			errorlog.innerHTML = "please specify the Tag of your event";
-			return;
-		}
-		if (description.length == 0) {
-			errorlog.innerHTML = "please specify the description of your event";
-			return;
-		}
-		if (restriction.length == 0) {
-			restriction = "N/A";
-		}
+		// if (title.length == 0) {
+		// 	errorlog.innerHTML = "please specify the title of your event";
+		// 	return;
+		// }
+		// if (starting.length == 0) {
+		// 	errorlog.innerHTML = "please specify the starting time of your event";
+		// 	return;
+		// }
+		// if (ending.length == 0) {
+		// 	errorlog.innerHTML = "please specify the ending time of your event";
+		// 	return;
+		// }
+		// if (primaryTag == undefined) {
+		// 	errorlog.innerHTML = "please specify the Tag of your event";
+		// 	return;
+		// }
+		// if (description.length == 0) {
+		// 	errorlog.innerHTML = "please specify the description of your event";
+		// 	return;
+		// }
+		// if (restriction.length == 0) {
+		// 	restriction = "N/A";
+		// }
 
 		var startingTime = inputToNumber(starting);
 		var endingTime = inputToNumber(ending);
@@ -171,33 +231,59 @@ $(document).ready(function() {
 		var reader = [];
 
 		console.log("before store json file");
-		
-		for(var i = 0; i < imageCount; i++) {
-			console.log("attaching onload function for " + i);
-			reader.push(new FileReader());
-			var readerTmp = reader[i];
-		    readerTmp.onload = (function(value) { 
-		    	return function() {
-			        imagesLoaded++;
-			        console.log("has loaded " + imagesLoaded);
-			        var imgTmp = reader[value].result;
-					var n = imgTmp.indexOf(",");
-					var imgData = imgTmp.substr(n+1);
-					json["imageOfEvent"].push(imgData);
-			        if(imagesLoaded == imageCount){
-			            storeJsonFile(json, currentAccount);
-			        }
-			    }
-		    })(i);
-		}
 
-		if (imageCount > 0)
-			for (var i = 0; i < imageCount; i++) {
-				console.log("start loading " + i);
-				reader[i].readAsDataURL(fileInput.files[i]);
-			}
-		else
-			storeJsonFile(json, currentAccount);
+
+		// var newinput = document.getElementById("resized_img");
+		// var blob = dataURItoBlob(newinput.value);
+		// var fd = new FormData(document.forms[0]);
+		// fd.id = "resized_form";
+		// fd.type = "image/jpeg";
+		// fd.append("canvasImage", blob)
+        // console.log(fd);
+        // var files = fd.files
+        // var file = fd;
+
+		var files = document.getElementById("image").files;
+		
+        var file = files[0];
+        
+
+        
+
+        console.log(file)
+        if(file == null){
+            alert("No image selected.");
+        }
+        else{
+            get_signed_request(file, json, currentAccount);
+        }
+		
+		// for(var i = 0; i < imageCount; i++) {
+		// 	console.log("attaching onload function for " + i);
+		// 	reader.push(new FileReader());
+		// 	var readerTmp = reader[i];
+		//     readerTmp.onload = (function(value) { 
+		//     	return function() {
+		// 	        imagesLoaded++;
+		// 	        console.log("has loaded " + imagesLoaded);
+		// 	        var imgTmp = reader[value].result;
+		// 			var n = imgTmp.indexOf(",");
+		// 			var imgData = imgTmp.substr(n+1);
+		// 			json["imageOfEvent"].push(imgData);
+		// 	        if(imagesLoaded == imageCount){
+		// 	            storeJsonFile(json, currentAccount);
+		// 	        }
+		// 	    }
+		//     })(i);
+		// }
+
+		// if (imageCount > 0)
+		// 	for (var i = 0; i < imageCount; i++) {
+		// 		console.log("start loading " + i);
+		// 		reader[i].readAsDataURL(fileInput.files[i]);
+		// 	}
+		// else
+		// 	storeJsonFile(json, currentAccount);
 
 
 
@@ -207,6 +293,7 @@ $(document).ready(function() {
 
 function storeJsonFile(json, currentAccount) {
 	console.log("storeJsonFile");
+	console.log(json);
 	usersRef.orderByChild("username").equalTo(currentAccount).once("value", function(snapshot) {
 		snapshot.forEach(function(data) {
         	var authorProfileImg = data.val().usrProfileImage;
@@ -268,4 +355,160 @@ function getSecondaryTag(first, second, third) {
 	if (third)
 		result.push("Free Food");
 	return result;
+}
+
+
+
+
+
+
+
+// from: https://github.com/josefrichter/resize/blob/master/public/preprocess.js
+
+var fileinput = document.getElementById('image');
+
+var max_width = fileinput.getAttribute('data-maxwidth');
+var max_height = fileinput.getAttribute('data-maxheight');
+
+console.log("fileInput: " + fileinput)
+console.log("max_width: " + max_width)
+console.log("max_height: " + max_height)
+
+// var preview = document.getElementById('preview');
+
+var form = document.getElementById('form');
+
+function processfile(file) {
+  
+    if( !( /image/i ).test( file.type ) )
+        {
+            alert( "File "+ file.name +" is not an image." );
+            return false;
+        }
+
+    // read the files
+    var reader = new FileReader();
+    reader.readAsArrayBuffer(file);
+    
+    reader.onload = function (event) {
+      // blob stuff
+      var blob = new Blob([event.target.result]); // create blob...
+      window.URL = window.URL || window.webkitURL;
+      var blobURL = window.URL.createObjectURL(blob); // and get it's URL
+      
+      // helper Image object
+      var image = new Image();
+      image.src = blobURL;
+      // preview.appendChild(image); // preview commented out, I am using the canvas instead
+      image.onload = function() {
+        // have to wait till it's loaded
+        var resized = resizeMe(image); // send it to canvas
+        var newinput = document.createElement("input");
+        newinput.id = "resized_img";
+        newinput.type = 'image/jpeg';
+        newinput.name = 'images[]';
+        newinput.value = resized; // put result from canvas into new hidden input
+        console.log(fileinput.files[0]);
+        console.log(newinput)
+        form.appendChild(newinput);
+      }
+    };
+}
+
+function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
+}
+
+function readfiles(files) {
+  
+    // remove the existing canvases and hidden inputs if user re-selects new pics
+    var existinginputs = document.getElementsByName('images[]');
+    var existingcanvases = document.getElementById('resize_canvas');
+    console.log(existinginputs)
+    console.log(existingcanvases)
+    while (existinginputs.length > 0) { // it's a live list so removing the first element each time
+      // DOMNode.prototype.remove = function() {this.parentNode.removeChild(this);}
+      form.removeChild(existinginputs[0]);
+      preview.removeChild(existingcanvases);
+      console.log(existingcanvases)
+      // preview.removeChild(childNodes[0])
+    } 
+  
+    for (var i = 0; i < files.length; i++) {
+      processfile(files[i]); // process each file at once
+    }
+    // fileinput.value = ""; //remove the original files from fileinput
+    // TODO remove the previous hidden inputs if user selects other files
+}
+
+// this is where it starts. event triggered when user selects files
+fileinput.onchange = function(){
+  if ( !( window.File && window.FileReader && window.FileList && window.Blob ) ) {
+    alert('The File APIs are not fully supported in this browser.');
+    return false;
+    }
+  readfiles(fileinput.files);
+}
+
+// === RESIZE ====
+
+function resizeMe(img) {
+
+  console.log("resize me");
+
+  console.log(img);
+  
+  var canvas = document.createElement('canvas');
+
+  canvas.id = "resize_canvas";
+
+  var width = img.width;
+  var height = img.height;
+
+
+  console.log("width " + width);
+  console.log("height " + height);
+
+
+  // calculate the width and height, constraining the proportions
+  if (width > height) {
+    if (width > max_width) {
+      //height *= max_width / width;
+      height = Math.round(height *= max_width / width);
+      width = max_width;
+    }
+  } else {
+    if (height > max_height) {
+      //width *= max_height / height;
+      width = Math.round(width *= max_height / height);
+      height = max_height;
+    }
+  }
+  
+  // resize the canvas and draw the image data into it
+  canvas.width = width;
+  canvas.height = height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, width, height);
+  
+  preview.appendChild(canvas); // do the actual resized preview
+  
+  return canvas.toDataURL("image/jpeg",0.7); // get the data from canvas as 70% JPG (can be also PNG, etc.)
+
 }

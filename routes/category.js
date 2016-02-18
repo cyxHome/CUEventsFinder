@@ -68,7 +68,7 @@ exports.viewSeminars = function(req, res){
 };
 
 exports.viewAthletics = function(req, res){
-	getCategoryData(res, 0, 10, "Althetics");
+	getCategoryData(res, 0, 10, "Athletics");
 };
 
 exports.viewFreeFood = function(req, res){
