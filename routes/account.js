@@ -60,7 +60,7 @@ exports.addAccount = function(req, res) {
     age: 20,
     gender: "",
     interests: ["None"],
-    myPostNumber: 0,
+    myPostsNumber: 0,
     myAttendenceNumber: 0,
     nickname: "",
     usrProfileImage: "",
