@@ -60,7 +60,7 @@ app.get('/category/social', category.viewSocial);
 app.get('/category/performance', category.viewPerformance);
 app.get('/category/political', category.viewPolitical);
 app.get('/category/seminars', category.viewSeminars);
-app.get('/category/althletics', category.viewAthletics);
+app.get('/category/athletics', category.viewAthletics);
 app.get('/category/freefood', category.viewFreeFood);
 app.get('/category/cornellsponsored', category.viewCornellSponsored);
 app.get('/upcoming', searchhandler.lookupUpcomingEvents);

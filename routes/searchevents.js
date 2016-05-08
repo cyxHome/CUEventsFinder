@@ -47,9 +47,9 @@ exports.lookupEventsByKeyword = function(req, res) { 
 
 exports.lookupUpcomingEvents = function(req, res) {
   // for real use
-  // ref.orderByChild("startingTime").startAt(getDate()).limitToFirst(10).once("value", function(snapshot) {
+  ref.orderByChild("startingTime").startAt(getDate()).limitToFirst(10).once("value", function(snapshot) {
   // for demo
-  ref.orderByChild("startingTime").limitToFirst(10).once("value", function(snapshot) {
+  // ref.orderByChild("startingTime").limitToFirst(10).once("value", function(snapshot) {
       var result = {
           "result": []
       }

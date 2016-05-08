@@ -60,7 +60,7 @@
 
     <!-- Popular Events Grid Section -->
     <section id="popular" class="bg-light-gray">
-        <div class="container">
+        <!-- <div class="container"> -->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Most Popular Events Right Now</h2>
@@ -70,7 +70,7 @@
 
             <div class="row">
             {{#each popular}}
-                <div class="col-lg-4 col-md-6 col-sm-6 popular-item">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 popular-item">
                     <a href="#" class="event-click hvr-glow" data-internalid="{{id}}">
                         <div class="popular-caption popular-link">
                             <h4 class="title">{{title}}</h4>
@@ -87,7 +87,7 @@
                 </div>
             {{/each}}
             </div>
-        </div>
+        <!-- </div> -->
     </section>
     <!-- Popular events end here -->
 
@@ -106,7 +106,7 @@
         <div class="container-fluid">
             <div class="row no-gutter">
             {{#each category}}
-                <div class="col-lg-4 col-sm-6">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                     <a href="{{url}}" class="category-box">
                         <img src="{{img}}" class="img-responsive" alt="">
                         <div class="category-box-caption" style="background: {{categoryColor}}">
