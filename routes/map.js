@@ -1,6 +1,11 @@
 var Firebase = require("firebase");
 var processData = require('./processData.js');
-var eventRef = new Firebase("https://event-finder.firebaseio.com/events");/*
+// var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
+var eventRef = new Firebase("https://event-finder-test.firebaseio.com/events");
+
+
+/*
+
  * GET map page. 
  */
 

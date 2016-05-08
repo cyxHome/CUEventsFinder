@@ -1,6 +1,7 @@
 var Firebase = require("firebase");
 var processData = require('./processData.js');
-var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
+// var eventRef = new Firebase("https://event-finder.firebaseio.com/events");
+var eventRef = new Firebase("https://event-finder-test.firebaseio.com/events");
 
 function getCategoryData(res, start, length, category) {
 	console.log("getting category: " + category);
@@ -67,7 +68,7 @@ exports.viewSeminars = function(req, res){
 };
 
 exports.viewAthletics = function(req, res){
-	getCategoryData(res, 0, 10, "Althetics");
+	getCategoryData(res, 0, 10, "Athletics");
 };
 
 exports.viewFreeFood = function(req, res){

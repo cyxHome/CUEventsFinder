@@ -1,4 +1,5 @@
-var eventsRef = new Firebase("https://event-finder.firebaseio.com/events");
+// var eventsRef = new Firebase("https://event-finder.firebaseio.com/events");
+eventsRef = new Firebase("https://event-finder-test.firebaseio.com/events");
 
 // In the following example, markers appear when the user clicks on the map.
 // Each marker is labeled with a single alphabetical character.

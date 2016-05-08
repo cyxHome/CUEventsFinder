@@ -37,6 +37,7 @@ function getCategoryColor(type) {
 }
 
 exports.processSearchListData = function(data) {
+    url_max_possible_length = 1000
     var tmp = {
         "id": data.key(),
         "startingTime": timeprocessing.numberToText(data.val().startingTime),
@@ -49,8 +50,15 @@ exports.processSearchListData = function(data) {
         "numberOfViewed": data.val().numberOfViewed,
         "url": "/details/" + data.key()
       };
-      if (data.val().imageOfEvent != null) 
-        tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
+      url_max_possible_length = 1000
+      if (data.val().imageOfEvent != null) {
+        if (data.val().imageOfEvent[0].length < url_max_possible_length) {
+            console.log(data.val().imageOfEvent[0]);
+            tmp["img"] = data.val().imageOfEvent[0];
+        }
+        else 
+            tmp["img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
+      }
       else
         tmp["img"] = '/img/category/' + getCategoryImgName(data.val().primaryTag) + ".jpg";
       return tmp;

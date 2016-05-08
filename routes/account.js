@@ -1,5 +1,6 @@
 var Firebase = require("firebase");
-var ref = new Firebase("https://event-finder.firebaseio.com/users");
+// var ref = new Firebase("https://event-finder.firebaseio.com/users");
+var ref = new Firebase("https://event-finder-test.firebaseio.com/users");
 
 
 
@@ -59,7 +60,7 @@ exports.addAccount = function(req, res) {
     age: 20,
     gender: "",
     interests: ["None"],
-    myPostNumber: 0,
+    myPostsNumber: 0,
     myAttendenceNumber: 0,
     nickname: "",
     usrProfileImage: "",

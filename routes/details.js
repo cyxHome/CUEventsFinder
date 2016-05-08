@@ -1,5 +1,6 @@
 var Firebase = require("firebase");
-var eventsRef = new Firebase("https://event-finder.firebaseio.com/events");
+// var eventsRef = new Firebase("https://event-finder.firebaseio.com/events");
+var eventsRef = new Firebase("https://event-finder-test.firebaseio.com/events");
 var timeprocessing = require('./timeprocessing.js');
 
 var toRender;
@@ -49,8 +50,13 @@ function viewByID(id, res) {
             "pritag": data.val().primaryTag,
             "sectags": data.val().secondaryTag,
         };
-        if (data.val().imageOfEvent[0] != null) {
-            tmp["pri-img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
+        if (data.val().imageOfEvent != null) {
+          if (data.val().imageOfEvent[0].length < url_max_possible_length) {
+              console.log(data.val().imageOfEvent[0]);
+              tmp["pri-img"] = data.val().imageOfEvent[0];
+          }
+          else 
+              tmp["pri-img"] = "data:image/png;base64," + data.val().imageOfEvent[0];
         }
         if (img.length > 0) {
             tmp['img'] = img;
