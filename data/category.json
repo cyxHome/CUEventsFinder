@@ -4,42 +4,48 @@
 			"id": "category1",
 			"img": "img/category/Professional.jpg",
 			"title": "Professional Events",
-			"url": "/category/professional",
+			"type": "Professional Events",
+			"primary": "True",
 			"categoryColor": "rgba(122,175,238,.8)"
 		},
 		{
 			"id": "category2",
 			"img": "img/category/Social.jpg",
 			"title": "Social Events",
-			"url": "/category/social",
+			"type": "Social Events",
+			"primary": "True",
 			"categoryColor": "rgba(242,222,141,.8)" 
 		},
 		{
 			"id": "category3",
 			"img": "img/category/Performance.jpg",
 			"title": "Performance Events",
-			"url": "/category/performance",
+			"type": "Performance Events",
+			"primary": "True",
 			"categoryColor": "rgba(196,119,238,.8)" 
 		},
 		{
 			"id": "category4",
 			"img": "img/category/Political.jpg",
 			"title": "Political Events",
-			"url": "/category/political",
+			"type": "Political Events",
+			"primary": "True",
 			"categoryColor": "rgba(255,255,120,.8)" 
 		},
 		{
 			"id": "category5",
 			"img": "img/category/Seminars.jpg",
 			"title": "Seminars",
-			"url": "/category/seminars",
+			"type": "Seminars",
+			"primary": "True",
 			"categoryColor": "rgba(115,245,115,.8)" 
 		},
 		{
 			"id": "category6",
 			"img": "img/category/Athletics.jpg",
 			"title": "Athletics",
-			"url": "/category/athletics",
+			"type": "Athletics",
+			"primary": "True",
 			"categoryColor": "rgba(239,67,67,.8)" 
 		}
 	]

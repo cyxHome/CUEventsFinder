@@ -47,7 +47,7 @@
 
                 <h3 class="page-header">
                     {{title}}
-                    <small>coming up</small>
+                    <small>{{date}}</small>
                 </h3>
 
 
@@ -75,10 +75,10 @@
                 <!-- Pager -->
                 <ul class="pager">
                     <li class="previous">
-                        <a href="#">&larr; Sooner</a>
+                        <a href="javascript:jumpToCategoryOfDate('{{category}}','{{primary}}', '{{previousDate}}')">&larr; Sooner</a>
                     </li>
                     <li class="next">
-                        <a href="#">Later &rarr;</a>
+                        <a href="javascript:jumpToCategoryOfDate('{{category}}','{{primary}}', '{{nextDate}}')">Later &rarr;</a>
                     </li>
                 </ul>
 
@@ -96,26 +96,26 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="/category/professional">Professonial Events</a>
+                                <li><a href="javascript:clickOnCategory('Professional Events','True')">Professonial Events</a>
                                 </li>
-                                <li><a href="/category/social">Social Events</a>
+                                <li><a href="javascript:clickOnCategory('Social Events','True')">Social Events</a>
                                 </li>
-                                <li><a href="/category/performance">Performance Events</a>
+                                <li><a href="javascript:clickOnCategory('Performance Events','True')">Performance Events</a>
                                 </li>
-                                <li><a href="/category/political">Political Events</a>
+                                <li><a href="javascript:clickOnCategory('Political Events','True')">Political Events</a>
                                 </li>
                             </ul>
                         </div>
                         <!-- /.col-lg-6 -->
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="/category/seminars">Seminars Events</a>
+                                <li><a href="javascript:clickOnCategory('Seminars','True')">Seminars Events</a>
                                 </li>
-                                <li><a href="/category/athletics">Athletics Events</a>
+                                <li><a href="javascript:clickOnCategory('Athletics','True')">Athletics Events</a>
                                 </li>
-                                <li><a href="/category/freefood">Free Food</a>
+                                <li><a href="javascript:clickOnCategory('Free Food','False')">Free Food</a>
                                 </li>
-                                <li><a href="/category/cornellsponsored">Cornell Sponsored</a>
+                                <li><a href="javascript:clickOnCategory('Cornell Sponsored','False')">Cornell Sponsored</a>
                                 </li>
                             </ul>
                         </div>
@@ -147,6 +147,9 @@
     <script src="/js/jquery.easing.min.js"></script>
     <script src="/js/jquery.fittext.js"></script>
     <script src="/js/wow.min.js"></script>
+
+    <!-- Handling click on the category tabs -->
+    <script src="/js/category-click.js"></script>
 
     <!-- Custom Header, Footer, Catagory Theme JavaScript -->
     <script src="/js/searchlist.js"></script>

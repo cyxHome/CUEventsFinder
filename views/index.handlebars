@@ -91,6 +91,11 @@
     </section>
     <!-- Popular events end here -->
 
+    <script>
+    function doSomething() {
+      alert("hello")
+    }
+    </script>
 
 
     <!-- Catagory starts here -->
@@ -107,7 +112,7 @@
             <div class="row no-gutter">
             {{#each category}}
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <a href="{{url}}" class="category-box">
+                    <a href="javascript:clickOnCategory('{{type}}','{{primary}}')" class="category-box">
                         <img src="{{img}}" class="img-responsive" alt="">
                         <div class="category-box-caption" style="background: {{categoryColor}}">
                             <div class="category-box-caption-content">
@@ -141,6 +146,9 @@
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/jquery.fittext.js"></script>
     <script src="js/wow.min.js"></script>
+
+    <!-- Handling click on the category tabs -->
+    <script src="/js/category-click.js"></script>
 
     <!-- load navbar and contact info -->
     <script src="js/index.js"></script>

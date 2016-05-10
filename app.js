@@ -75,14 +75,7 @@ app.get('/contactinfo', contactinfo.view);
 app.get('/details', details.view);
 app.get('/details/*', details.viewIdAtUrl);
 app.get('/searchlist', searchlist.view);
-app.get('/category/professional', category.viewProfessional);
-app.get('/category/social', category.viewSocial);
-app.get('/category/performance', category.viewPerformance);
-app.get('/category/political', category.viewPolitical);
-app.get('/category/seminars', category.viewSeminars);
-app.get('/category/athletics', category.viewAthletics);
-app.get('/category/freefood', category.viewFreeFood);
-app.get('/category/cornellsponsored', category.viewCornellSponsored);
+app.get('/category/', category.viewCategory);
 app.get('/upcoming', searchhandler.lookupUpcomingEvents);
 app.get('/search-events-by-keyword/*', searchhandler.lookupEventsByKeyword);
 

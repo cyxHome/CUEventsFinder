@@ -11,7 +11,10 @@ var labelIndex = 0;
 var markers = {};
 var infowindows = {};
 var infowindowforclicks = {};
+var infoContents = {};
 var locations = {};
+var listenerIdentifiers = {}
+var idToMarkerID = {}
 var map;
 
 function initialize() {
@@ -61,8 +64,11 @@ function initialize() {
 function handlerIn() {
   var id = $(this).attr('id');
   console.log("in " + id);
-  markers[id].setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
-  infowindows[id].open(map, markers[id]);
+  var location = locations[id]
+  var markerID = location.lat + ";" + location.lng;
+
+  markers[markerID].setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+  infowindows[id].open(map, markers[markerID]);
   map.panTo(locations[id]);
   for (var key in infowindowforclicks) {
         infowindowforclicks[key].close();
@@ -73,7 +79,10 @@ function handlerIn() {
 function handlerOut() {
   var id = $(this).attr('id');
   console.log("out " + id);
-  markers[id].setIcon("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
+  var location = locations[id]
+  var markerID = location.lat + ";" + location.lng;
+
+  markers[markerID].setIcon("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
   infowindows[id].close();
 }
 
@@ -97,7 +106,40 @@ function handlerOut() {
 function addMarker(location, map, name, id, locationOfEvent) {
   var contentString ='<a href="/details/' + id + '">'+name+'</a></div>';
 
-  console.log("Content string: " + contentString);
+
+  locations[id] = location;
+
+  // the infomation window to display when mouse hover to the item. 
+  var infowindow = new google.maps.InfoWindow({
+    content: "<p>"+locationOfEvent+"</p>"
+  });
+  infowindows[id] = infowindow;
+
+  // only create one marker for a lat,lng pair. 
+  var markerID = location.lat + ";" + location.lng;
+
+
+  // append new entry to the information window content if the location is already marked. 
+  // remove the old listener for the marker. 
+  var infoContent = ""
+  if (markerID in infowindowforclicks) {
+      google.maps.event.removeListener(listenerIdentifiers[markerID]);
+      infoContent = infoContents[markerID];
+      console.log("get infoContent from map: " + infoContent);
+  }
+  var tmp = contentString + "<br><p>"+locationOfEvent+"</p><br>";
+  infoContent = infoContent + tmp;
+  infoContents[markerID] = infoContent;
+
+  console.log("infoContent: " + infoContent);
+
+  // the information window to display when the user click on the marker
+  var infowindowforclick = new google.maps.InfoWindow({
+    content: infoContent
+  });
+
+  infowindowforclicks[markerID] = infowindowforclick;
+
 
   // Add the marker at the clicked location, and add the next-available label
   // from the array of alphabetical characters.
@@ -110,31 +152,20 @@ function addMarker(location, map, name, id, locationOfEvent) {
 
   });
 
-  locations[id] = location;
-  markers[id] = marker;
+  markers[markerID] = marker;
 
-  var infowindow = new google.maps.InfoWindow({
-    content: "<p>"+locationOfEvent+"</p>"
-  });
+  makeInfoWindowEvent(map, infowindowforclick, marker, markerID);
 
-  infowindows[id] = infowindow;
-
-  var infowindowforclick = new google.maps.InfoWindow({
-    content: contentString + "<br><p>"+locationOfEvent+"</p>"
-  });
-
-  infowindowforclicks[id] = infowindowforclick;
-
-  makeInfoWindowEvent(map, infowindowforclick, marker);
 }
 
-function makeInfoWindowEvent(map, infowindow, marker) {
-   google.maps.event.addListener(marker, 'click', function() {
-      for (var key in infowindowforclicks) {
-        infowindowforclicks[key].close();
-      }
-      infowindow.open(map, marker);
-   });
+function makeInfoWindowEvent(map, infowindow, marker, markerID) {
+    var identifier = google.maps.event.addListener(marker, 'click', function() {
+        for (var key in infowindowforclicks) {
+          infowindowforclicks[key].close();
+        }
+        infowindow.open(map, marker);
+    });
+    listenerIdentifiers[markerID] = identifier
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
